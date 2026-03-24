@@ -22,11 +22,13 @@ public class MechaMove : MonoBehaviour
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
     }
+
     void Update()
     {
         GroundCheck();
         Move();
         Jump();
+        Updown();
     }
     void GroundCheck()
     {
@@ -59,11 +61,25 @@ public class MechaMove : MonoBehaviour
     {
         if (Input.GetButtonDown("Jump") && isGrounded)
         {
+            Debug.Log("jump: ");
             velocity.y = Mathf.Sqrt(jumpHeight * -2f * gravity);
         }
 
         // 중력 적용
         velocity.y += gravity * Time.deltaTime;
         controller.Move(velocity * Time.deltaTime);
+    }
+    void Updown()
+    {
+        // Updown 기능 구현
+        if (Input.GetKey(KeyCode.Space))
+        {
+            Debug.Log("updown: ");
+            controller.Move(Vector3.up * speed * Time.deltaTime);
+        }
+        else if (Input.GetKey(KeyCode.LeftShift))
+        {
+            controller.Move(Vector3.down * speed * Time.deltaTime);
+        }
     }
 }
