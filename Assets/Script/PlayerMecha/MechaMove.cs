@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 
 public class MechaMove : MonoBehaviour
@@ -7,6 +8,8 @@ public class MechaMove : MonoBehaviour
 
     public float speed = 6f;
     public float turnSmoothTime = 0.1f;
+    public float boosterSpeed = 50.0f;
+    float currentSpeed;
     float turnSmoothVelocity;
 
     public float gravity = -9.81f;
@@ -55,13 +58,22 @@ public class MechaMove : MonoBehaviour
             // 이동 방향 계산
             Vector3 moveDir = Quaternion.Euler(0f, targetAngle, 0f) * Vector3.forward;
             controller.Move(moveDir.normalized * speed * Time.deltaTime);
+
+            // 부스터 기능 구현
+
+            if (Input.GetMouseButton(1))
+            {
+                controller.Move(moveDir.normalized * boosterSpeed * Time.deltaTime);
+            }
         }
+
+        
     }
     void Jump()
     {
         if (Input.GetButtonDown("Jump") && isGrounded)
         {
-            Debug.Log("jump: ");
+            // Debug.Log("jump: ");
             velocity.y = Mathf.Sqrt(jumpHeight * -2f * gravity);
         }
 
@@ -74,7 +86,7 @@ public class MechaMove : MonoBehaviour
         // Updown 기능 구현
         if (Input.GetKey(KeyCode.Space))
         {
-            Debug.Log("updown: ");
+            // Debug.Log("updown: ");
             controller.Move(Vector3.up * speed * Time.deltaTime);
         }
         else if (Input.GetKey(KeyCode.LeftShift))
@@ -82,4 +94,5 @@ public class MechaMove : MonoBehaviour
             controller.Move(Vector3.down * speed * Time.deltaTime);
         }
     }
+
 }
