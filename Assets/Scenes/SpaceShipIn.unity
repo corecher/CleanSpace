@@ -367,7 +367,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 04e11ee22f703cc45b5667189e1b6a85, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::InventoryManager
-  inventory: []
+  inventory:
+  - {fileID: 11400000, guid: 2c42a4446119ca34ca7d335b3c1deef9, type: 2}
 --- !u!4 &1916242503
 Transform:
   m_ObjectHideFlags: 0
